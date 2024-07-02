@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Playlist from "../components/Playlist";
-
+import TimePicker from "../components/TimePicker";
+import "./MusicTimer.css";
 function MusicTimer(props) {
   const [userName, setUserName] = useState("");
   const { token } = props;
@@ -13,7 +13,7 @@ function MusicTimer(props) {
           headers: { Authorization: `Bearer ${token}` },
         });
         const response = await result.json();
-        // console.log(response);
+
         setUserName(response.display_name);
         return response;
       }
@@ -22,8 +22,9 @@ function MusicTimer(props) {
   });
 
   return (
-    <section>
-      <h1>{`WELCOME ${userName}`}</h1>
+    <section className="timer-page">
+      <p className="user">{`Logged in as ${userName}`}</p>
+      <TimePicker token={token} />
     </section>
   );
 }

@@ -1,7 +1,6 @@
 import "./App.css";
 import Login from "./pages/Login";
 import MusicTimer from "./pages/MusicTimer";
-import Player from "./components/Player";
 import { useEffect, useState } from "react";
 const redirectUri = import.meta.env.VITE_REDIRECT_URI;
 const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -14,7 +13,7 @@ function App() {
   useEffect(() => {
     async function getToken(code) {
       if (code && token === null) {
-        let codeVerifier = localStorage.getItem("code_verifier");
+        let codeVerifier = sessionStorage.getItem("code_verifier");
 
         const payload = {
           method: "POST",
@@ -35,7 +34,7 @@ function App() {
           payload
         );
         const response = await body.json();
-        localStorage.setItem("access_token", response.access_token);
+        sessionStorage.setItem("access_token", response.access_token);
         if (response) {
           const url = new URL(window.location.href);
           url.searchParams.delete("code");
@@ -43,19 +42,14 @@ function App() {
           window.history.replaceState({}, document.title, updatedUrl);
         }
       }
-      const newToken = localStorage.getItem("access_token");
+      const newToken = sessionStorage.getItem("access_token");
       setToken(newToken);
     }
     getToken(code);
   }, []);
-  console.log(token);
   return (
     <section>
-      {token === null ? (
-        <Login />
-      ) : (
-        <MusicTimer token={token} /> && <Player token={token} />
-      )}
+      {token === null ? <Login /> : <MusicTimer token={token} />}
     </section>
   );
 }

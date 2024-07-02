@@ -1,0 +1,51 @@
+.timepicker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  width: 50%;
+}
+.minutes {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+}
+
+.hours {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;
+}
+
+select {
+  margin: 0.5rem;
+  /* padding-left: 2rem; */
+  width: 60%;
+  font-size: large;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+  color: white;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.generate {
+  font-size: small;
+  margin: 0.5rem;
+  font-weight: bold;
+  background-color: #1db954;
+}
+
+.gen {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}

@@ -1,0 +1,17 @@
+.track {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-left: 2rem;
+}
+
+.artist {
+  font-size: 11px;
+  color: lightgray;
+}

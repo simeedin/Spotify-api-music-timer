@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-
-function Playlist() {
+import Player from "./Player";
+import "./Playlist.css";
+function Playlist(props) {
+  const { ms, token, generated } = props;
   const [playlists, setPlaylists] = useState([]);
   useEffect(() => {
     async function getPlaylists() {
-      const token = localStorage.getItem("access_token");
       if (token) {
         const result = await fetch(
-          "https://api.spotify.com/v1/playlists/37i9dQZF1F0sijgNaJdgit",
+          "https://api.spotify.com/v1/playlists/37i9dQZF1E9UMvDGnXSlpL?si=2546656f4f534e8b",
           {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
@@ -26,19 +27,25 @@ function Playlist() {
       name: track.track.name,
       duration: track.track.duration_ms,
       uri: track.track.uri,
+      artists: track.track.artists,
     };
     return trackObj;
   });
 
-  console.log(tracks);
+  console.log();
 
-  let requestedDurationInMs = 960000;
+  const shuffle = (trackArr) => {
+    return trackArr.sort(() => Math.random() - 0.5);
+  };
+
+  const shuffledPlaylist = shuffle(tracks);
+
+  let requestedDurationInMs = ms;
   const allowedDiffInMs = 30000;
-  // min: 885000 max: 915000
   let totalDurationInMs = 0;
   let timer = [];
 
-  for (const track of tracks) {
+  for (const track of shuffledPlaylist) {
     const duration = track.duration;
     if (
       totalDurationInMs + duration <
@@ -60,32 +67,19 @@ function Playlist() {
   }
   console.log(totalDurationInMs);
   console.log(timer);
-  //   let duration = 210000;
-  //   let trackNrs = [];
 
-  //   for (let i = 0; i < 4; i++) {
-  //     let randomNr = Math.floor(Math.random() * 99);
-  //     trackNrs.push(randomNr);
-  //   }
+  let trackUris = [];
 
-  //   console.log(trackNrs);
+  timer.map((item) => trackUris.push(item.uri));
 
-  //   const randomTracks = playlists;
-  //   let wrapped = [];
-
-  //   playlists.filter((playlist) => {
-  //     const name = playlist.name;
-  //     if (
-  //       playlist.owner.display_name === "Spotify" &&
-  //       name.includes("Your Top Songs")
-  //     ) {
-  //       wrapped.push(playlist);
-  //     }
-  //   });
-  //   console.log(wrapped);
   return (
     <section>
-      <h1>Playlists</h1>
+      <Player
+        token={token}
+        trackUris={trackUris}
+        timer={timer}
+        generated={generated}
+      />
     </section>
   );
 }

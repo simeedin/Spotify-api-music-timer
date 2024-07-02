@@ -30,7 +30,7 @@ export const redirectToSpotifyAuth = async () => {
   const codeVerifier = generateRandomString(64);
   const hashed = await sha256(codeVerifier);
   const codeChallenge = base64encode(hashed);
-  window.localStorage.setItem("code_verifier", codeVerifier);
+  window.sessionStorage.setItem("code_verifier", codeVerifier);
 
   const params = {
     response_type: "code",
