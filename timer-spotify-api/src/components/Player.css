@@ -1,0 +1,30 @@
+.current-song {
+  color: #1db954;
+}
+
+.current-artist {
+  color: #1db954;
+  font-size: 11px;
+}
+
+.started {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle {
+  width: 50%;
+  margin: 2rem;
+}
+
+.topic {
+  margin-bottom: 0.7rem;
+  font-size: large;
+  font-weight: bold;
+}
+
+.player {
+  display: flex;
+  justify-content: center;
+}

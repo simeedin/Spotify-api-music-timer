@@ -1,0 +1,14 @@
+.user {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.timer-page {
+  background-color: #191414;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
